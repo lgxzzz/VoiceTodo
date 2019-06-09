@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.MianzeActivity">
+
+
+    <include layout="@layout/layout_toolbar"/>
+    <TextView  android:padding="10dp"
+            android:id="@+id/tv_content"
+            android:text="由于事件意外删除或强制软件退出导致事件无法提醒造成的损失，本软件拥有人不负任何责任。"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</LinearLayout>

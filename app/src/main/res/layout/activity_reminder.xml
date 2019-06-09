@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".task.AddTaskActivity">
+    <!--<include layout="@layout/layout_toolbar"/>-->
+    <!--<LinearLayout android:layout_width="match_parent"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:gravity="center_vertical"-->
+                  <!--android:orientation="horizontal">-->
+        <!--<ImageView-->
+                <!--android:layout_width="28dp"-->
+                <!--android:src="@drawable/ic_title"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:layout_height="28dp"-->
+                <!--android:padding="2dp"-->
+                <!--android:layout_margin="8dp"/>-->
+        <!--<EditText-->
+                <!--android:id="@+id/etTodoName"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="标题"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textColor="#333"-->
+                <!--android:textColorHint="#555"-->
+                <!--android:padding="8dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@null"/>-->
+        <!--<View-->
+                <!--android:id="@+id/ivChoiceColor"-->
+                <!--android:layout_width="42dp"-->
+                <!--android:layout_height="42dp"-->
+                <!--android:padding="8dp"-->
+                <!--android:background="@color/colorAccent"-->
+                <!--android:layout_margin="8dp"/>-->
+    <!--</LinearLayout>-->
+    <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:background="@color/colorLine"-->
+            <!--android:layout_margin="8dp"/>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/rvColors"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="96dp"/>-->
+
+    <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:background="@color/colorLine"-->
+            <!--android:layout_margin="8dp"/>-->
+
+    <!--<LinearLayout android:layout_width="match_parent"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:gravity="center_vertical"-->
+                  <!--android:orientation="horizontal">-->
+
+        <!--<ImageView android:layout_width="28dp"-->
+                   <!--android:layout_height="28dp"-->
+                   <!--android:layout_margin="8dp"-->
+                   <!--android:padding="2dp"-->
+                   <!--android:src="@drawable/ic_desc"-->
+                   <!--android:scaleType="centerCrop"-->
+        <!--/>-->
+        <!--<EditText-->
+                <!--android:id="@+id/etTodoDesc"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textColor="#333"-->
+                <!--android:padding="8dp"-->
+                <!--android:textColorHint="#555"-->
+                <!--android:hint="详细描述"-->
+                <!--android:background="@null"-->
+        <!--/>-->
+        <!--<ImageView android:layout_width="36dp"-->
+                   <!--android:layout_height="36dp"-->
+                   <!--android:layout_margin="8dp"-->
+        <!--/>-->
+    <!--</LinearLayout>-->
+    <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:background="@color/colorLine"-->
+    <!--/>-->
+
+
+    <!--<LinearLayout android:layout_width="match_parent"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:gravity="center_vertical"-->
+                  <!--android:orientation="horizontal"-->
+    <!--&gt;-->
+        <!--<ImageView android:layout_width="28dp"-->
+                   <!--android:layout_height="28dp"-->
+                   <!--android:padding="2dp"-->
+                   <!--android:src="@drawable/ic_repeat"-->
+                   <!--android:layout_margin="8dp"-->
+        <!--/>-->
+        <!--<RadioGroup-->
+                <!--android:id="@+id/rgAlarmType"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="8dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                    <!--android:id="@+id/rbRepeat"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:checked="true" android:textSize="16sp"-->
+                    <!--android:text="重复"-->
+            <!--/>-->
+            <!--<RadioButton-->
+                    <!--android:id="@+id/rbSingle"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp" android:textSize="16sp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="单次"-->
+            <!--/>-->
+
+        <!--</RadioGroup>-->
+    <!--</LinearLayout>-->
+
+
+
+    <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:background="@color/colorLine"-->
+            <!--android:layout_margin="8dp"-->
+    <!--/>-->
+
+    <!--<LinearLayout android:layout_width="match_parent"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:gravity="center_vertical"-->
+                  <!--android:orientation="horizontal"-->
+    <!--&gt;-->
+        <!--<ImageView-->
+                <!--android:id="@+id/ivNotifiType"-->
+                <!--android:layout_width="28dp"-->
+                <!--android:layout_height="28dp"-->
+                <!--android:padding="2dp"-->
+                <!--android:src="@drawable/ic_bell"-->
+                <!--android:layout_margin="8dp"-->
+        <!--/>-->
+        <!--<RadioGroup-->
+                <!--android:id="@+id/rgNotifiType"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="8dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                    <!--android:id="@+id/rbBell"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:checked="true" android:textSize="16sp"-->
+                    <!--android:text="响铃"-->
+            <!--/>-->
+            <!--<RadioButton-->
+                    <!--android:id="@+id/rbVibrate"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp" android:textSize="16sp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="震动"-->
+            <!--/>-->
+
+        <!--</RadioGroup>-->
+    <!--</LinearLayout>-->
+
+
+
+    <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:background="@color/colorLine"-->
+            <!--android:layout_margin="8dp"-->
+    <!--/>-->
+    <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_vertical"-->
+
+            <!--android:orientation="horizontal"-->
+    <!--&gt;-->
+        <!--<TextView-->
+                <!--android:id="@+id/tvChoiceDate"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:visibility="visible"-->
+                <!--android:text="请选择日期" android:textSize="16sp"-->
+                <!--android:layout_height="36dp"-->
+                <!--android:drawableLeft="@drawable/ic_choice_date"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingLeft="8dp" android:textColor="#333"-->
+                <!--android:paddingRight="8dp"-->
+                <!--android:layout_margin="8dp"-->
+
+        <!--/>-->
+
+        <!--<View android:layout_width="1px"-->
+              <!--android:id="@+id/viewTimeChooseDivider"-->
+              <!--android:layout_height="28dp"-->
+              <!--android:background="@color/colorLine"-->
+        <!--/>-->
+
+        <!--<TextView-->
+                <!--android:id="@+id/tvChoiceTime"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="请选择时间"-->
+                <!--android:paddingLeft="8dp" android:textSize="16sp"-->
+                <!--android:paddingRight="8dp"-->
+                <!--android:layout_height="36dp" android:textColor="#333"-->
+                <!--android:gravity="center"-->
+                <!--android:drawableLeft="@drawable/ic_choice_time"-->
+                <!--android:layout_margin="8dp"-->
+
+        <!--/>-->
+
+    <!--</LinearLayout>-->
+    <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:background="@color/colorLine"-->
+            <!--android:layout_margin="8dp"-->
+    <!--/>-->
+
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00BCD5</color>
+    <color name="colorPrimaryLight">#7aefff</color>
+    <color name="colorPrimaryDark">#00BCD5</color>
+    <color name="colorAccent">#00BCD5</color>
+
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
+
+    <color name="colorLine">#cccccc</color>
+
+    <color name="task_default">#7af3ff</color>
+    <color name="task_1">#e287b1</color>
+    <color name="task_2">#da5975</color>
+    <color name="task_3">#1e7ab9</color>
+    <color name="task_4">#ef585b</color>
+    <color name="task_5">#478ba9</color>
+    <color name="task_6">#eb8d32</color>
+    <color name="task_7">#edc870</color>
+    <color name="task_8">#5eb8d3</color>
+    <color name="task_9">#e69c5a</color>
+    <color name="task_10">#9e6fe0</color>
+    <color name="task_11">#56ad5e</color>
+    <color name="task_12">#e14852</color>
+    <color name="task_13">#d26545</color>
+    <color name="task_14">#e3c56a</color>
+    <color name="task_15">#7cb9cb</color>
+    <color name="task_16">#9bcbbf</color>
+    <color name="task_17">#ecd499</color>
+    <color name="task_18">#b6a18c</color>
+    <color name="task_19">#d7958f</color>
+    <color name="task_20">#9791bf</color>
+    <color name="task_21">#bcdeeb</color>
+    <color name="task_22">#61b7ae</color>
+    <color name="task_23">#87d0c3</color>
+    <color name="task_24">#c0e8b6</color>
+
+</resources>

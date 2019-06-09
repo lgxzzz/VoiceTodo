@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    signingConfigs {
+        defaultsign {
+            keyAlias 'app'
+            keyPassword 'yecyec'
+            storeFile file('appreleasekey.jks')
+            storePassword 'yecyec'
+        }
+    }
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.upfinder.voicetodo"
+        minSdkVersion 16
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 28
+        versionCode 115
+        versionName "1.1.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi"
+//            abiFilters "armeabi" , "armeabi-v7a", "x86", "mips"
+        }
+
+
+
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile=output.outputFile
+                if(outputFile!=null && outputFile.name.endsWith('.apk')) {
+                    def fileName
+                    if(variant.buildType.name=="debug"){
+                        fileName = "语音提醒器-V${variant.versionName}-debug.apk"
+                    }else {
+                        def time=new Date().format("yyyyMMdd_HHmm", TimeZone.getTimeZone("GMT+8"))
+                        fileName = "语音提醒器-V${defaultConfig.versionName}-${time}-${variant.buildType.name}.apk"
+                    }
+
+                    outputFileName = fileName
+                }
+            }
+        }
+
+
+        signingConfig signingConfigs.defaultsign
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.defaultsign
+        }
+        debug {
+//            signingConfig signingConfigs.defaultsign
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    //UI
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+    //百度语音合成
+    implementation files('libs/com.baidu.tts_2.3.2.20180713_6101c2a.jar')
+    //worker
+    implementation 'android.arch.work:work-runtime:1.0.0-alpha01'
+    implementation 'android.arch.work:work-firebase:1.0.0-alpha01'
+    //ColorPicker
+    implementation 'cn.qqtheme.framework:ColorPicker:1.1.2'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'com.airbnb.android:lottie:2.7.0'
+}

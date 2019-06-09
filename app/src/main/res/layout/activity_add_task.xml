@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".task.AddTaskActivity">
+    <include layout="@layout/layout_toolbar"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="28dp"
+            android:src="@drawable/ic_title"
+            android:scaleType="centerCrop"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            android:layout_margin="8dp"/>
+        <EditText
+            android:id="@+id/etTodoName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="提醒标题"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@id/etTodoDesc"
+            android:textSize="16sp"
+            android:textColor="#333" android:singleLine="true"
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:background="@null"/>
+        <com.upfinder.voicetodo.view.CirclePointView
+            android:id="@+id/ivChoiceColor"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:background="@color/task_17"
+            android:layout_margin="8dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine"
+        android:layout_margin="8dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/llColorChoose"
+        >
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content" android:textColor="#333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:text="提醒颜色"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvColors" android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorLine"
+            android:layout_margin="8dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_desc"
+            android:scaleType="centerCrop"
+            />
+        <EditText
+            android:id="@+id/etTodoDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="#333"
+            android:padding="8dp" android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:hint="详细描述"
+            android:background="@null"
+            />
+        <ImageView android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="8dp"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"
+        android:background="@color/colorLine"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lineEvents"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_desc"
+                android:scaleType="centerCrop"
+                />
+            <EditText
+                android:id="@+id/etEventName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="事件内容"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@id/etTodoDesc"
+                android:textSize="16sp"
+                android:textColor="#333" android:singleLine="true"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:background="@null"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventAddBtn"
+                android:textColor="@android:color/black"
+                android:text="添加"
+                android:layout_margin="5dp"
+                />
+        </LinearLayout>
+        <com.upfinder.voicetodo.view.ScrollListView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/lineEventsListview"
+            android:visibility="gone"
+            >
+        </com.upfinder.voicetodo.view.ScrollListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRepeationChoose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <ImageView android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_repeat"
+            android:layout_margin="8dp"
+            />
+        <RadioGroup
+            android:id="@+id/rgAlarmType"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbRepeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" android:textSize="16sp"
+                android:text="重复" android:textColor="#333"
+                />
+            <RadioButton
+                android:id="@+id/rbSingle"
+                android:layout_width="wrap_content" android:textColor="#333"
+                android:layout_marginLeft="16dp" android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:text="单次"
+                />
+
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <View android:id="@+id/lineRepeationChoose"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine"
+        android:layout_margin="8dp"
+        />
+    <LinearLayout
+        android:id="@+id/llRepeationPeriod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <RelativeLayout android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content">
+            <ImageView android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_repeat"
+                android:layout_margin="8dp"
+                />
+            <TextView
+                android:id="@+id/tvRepeatPeriod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="11sp"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <HorizontalScrollView
+            android:scrollbars="none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioGroup
+                android:id="@+id/rgRepeatPeriod"
+                android:orientation="horizontal" android:padding="8dp" android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:checked="true"
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod1"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="1天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod2"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="2天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod3"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="3天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod5"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="5天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod7"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="7天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod10"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="10天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriod15"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="15天"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:button="@null"
+                    android:id="@+id/rbRepeatPeriodZdy"
+                    android:layout_width="60dp"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="自定义"
+                    android:textSize="16sp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shape_repeat_period_bg"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+    <View android:id="@+id/lineRepeationPeriod"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine"
+        android:layout_margin="8dp"
+        />
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/ivNotifiType"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_bell"
+            android:layout_margin="8dp"
+            />
+        <RadioGroup
+            android:id="@+id/rgNotifiType"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbBell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" android:textSize="16sp"
+                android:text="语音"
+                />
+            <RadioButton
+                android:id="@+id/rbVibrate"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp" android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:text="震动"
+                />
+
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine"
+        android:layout_margin="8dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+
+        android:orientation="horizontal"
+        >
+
+
+        <TextView
+            android:id="@+id/tvChoiceDate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:visibility="visible"
+            android:text="请选择日期" android:textSize="16sp"
+            android:layout_height="36dp"
+            android:drawableLeft="@drawable/ic_choice_date"
+            android:gravity="center"
+            android:paddingLeft="8dp" android:textColor="#333"
+            android:paddingRight="8dp"
+            android:layout_margin="8dp"
+
+            />
+
+        <View android:layout_width="1px"
+            android:id="@+id/viewTimeChooseDivider"
+            android:layout_height="28dp"
+            android:background="@color/colorLine"
+            />
+
+        <TextView
+            android:id="@+id/tvChoiceTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="请选择时间"
+            android:paddingLeft="8dp" android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:layout_height="36dp" android:textColor="#333"
+            android:gravity="center"
+            android:drawableLeft="@drawable/ic_choice_time"
+            android:layout_margin="8dp"
+
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine"
+        android:layout_margin="8dp"
+        />
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
