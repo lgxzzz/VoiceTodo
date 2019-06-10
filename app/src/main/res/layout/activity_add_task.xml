@@ -189,15 +189,15 @@
                 android:checked="true" android:textSize="16sp"
                 android:text="重复" android:textColor="#333"
                 />
-            <RadioButton
-                android:id="@+id/rbSingle"
-                android:layout_width="wrap_content" android:textColor="#333"
-                android:layout_marginLeft="16dp" android:textSize="16sp"
-                android:layout_height="wrap_content"
-                android:text="单次"
-                />
+        <RadioButton
+            android:id="@+id/rbSingle"
+            android:layout_width="wrap_content" android:textColor="#333"
+            android:layout_marginLeft="16dp" android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:text="单次"
+            />
 
-        </RadioGroup>
+    </RadioGroup>
     </LinearLayout>
 
 

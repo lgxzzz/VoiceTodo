@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="事件信息"
+            android:id="@+id/eventTitle"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+                <RadioGroup
+                    android:id="@+id/rgEventState"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbSuccess"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" android:textSize="16sp"
+                            android:text="已完成" android:textColor="#333"
+                            />
+                        <RadioButton
+                            android:id="@+id/rbFail"
+                            android:layout_width="wrap_content" android:textColor="#333"
+                            android:layout_marginLeft="16dp" android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:text="未完成"
+                            />
+                        <RadioButton
+                            android:id="@+id/rbIgnore"
+                            android:layout_width="wrap_content" android:textColor="#333"
+                            android:layout_marginLeft="16dp" android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:text="跳过此项"
+                            />
+                </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="上一项"
+                    android:id="@+id/btPreEvent"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="下一项"
+                    android:id="@+id/btNextEvent"
+                    />
+        </LinearLayout>
+
+</LinearLayout>

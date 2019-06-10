@@ -52,6 +52,10 @@ class AddTaskActivity : AppCompatActivity() {
         const val ALARM_EVENTS = 13
         const val NOTIFITYPE_BELL = 14
         const val NOTIFITYPE_VIBRATE = 15
+        const val EVENTS_STATE_SUCCESS = 16
+        const val EVENTS_STATE_IGNORE = 17
+        const val EVENTS_STATE_FAIL = 18
+        const val EVENTS_STATE_DEFAULT = 19
         //提醒周期
         var NOTIFI_REPEAT_PERIOD = intArrayOf(1, 2, 3, 5, 7, 10, 15, 0)
 
@@ -289,6 +293,7 @@ class AddTaskActivity : AppCompatActivity() {
         for (event in mEventChain){
             val eventObject = JSONObject();
             eventObject.put("event",event)
+            eventObject.put("state",EVENTS_STATE_DEFAULT)
             eventsJSONArray.put(eventObject)
         }
 

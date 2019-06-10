@@ -16,6 +16,7 @@ import com.upfinder.voicetodo.task.AddTaskActivity
 import com.upfinder.voicetodo.util.CalendarUtils
 import com.upfinder.voicetodo.utils.logE
 import com.upfinder.voicetodo.utils.toast
+import com.upfinder.voicetodo.view.EventsDialog
 import java.util.*
 
 class MyApplication : Application() {
@@ -25,8 +26,16 @@ class MyApplication : Application() {
         private lateinit var localDataSource: TasksLocalDataSource
         private lateinit var mApplication: MyApplication
         private const val DAY_MILLIS = 24 * 60 * 60 * 1000L
+        private lateinit var mEventsDialog : EventsDialog
         fun getInstance(): Application {
             return mApplication
+        }
+
+        //显示事件包弹窗
+        fun showEventsDialog(task:Task){
+            mEventsDialog =EventsDialog(MyApplication.getInstance().baseContext,R.layout.events_dialog,true,true);
+            mEventsDialog.setEvents(task.events)
+            mEventsDialog.show();
         }
 
         /*获取数据库实例*/
@@ -243,5 +252,6 @@ class MyApplication : Application() {
             }
         }
     }
+
 
 }
