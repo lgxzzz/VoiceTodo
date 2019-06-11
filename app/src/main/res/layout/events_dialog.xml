@@ -5,13 +5,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="@android:color/white"
+    >
 
         <TextView
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="事件信息"
             android:id="@+id/eventTitle"
+            android:textSize="25dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
             />
 
         <LinearLayout
@@ -30,24 +36,27 @@
 
                         <RadioButton
                             android:id="@+id/rbSuccess"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:checked="true" android:textSize="16sp"
                             android:text="已完成" android:textColor="#333"
+                            android:layout_weight="1"
                             />
                         <RadioButton
                             android:id="@+id/rbFail"
-                            android:layout_width="wrap_content" android:textColor="#333"
+                            android:layout_width="0dp" android:textColor="#333"
                             android:layout_marginLeft="16dp" android:textSize="16sp"
                             android:layout_height="wrap_content"
                             android:text="未完成"
+                            android:layout_weight="1"
                             />
                         <RadioButton
                             android:id="@+id/rbIgnore"
-                            android:layout_width="wrap_content" android:textColor="#333"
+                            android:layout_width="0dp" android:textColor="#333"
                             android:layout_marginLeft="16dp" android:textSize="16sp"
                             android:layout_height="wrap_content"
                             android:text="跳过此项"
+                            android:layout_weight="1"
                             />
                 </RadioGroup>
         </LinearLayout>

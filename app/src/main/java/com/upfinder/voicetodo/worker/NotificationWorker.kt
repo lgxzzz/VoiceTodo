@@ -25,7 +25,6 @@ import com.upfinder.voicetodo.task.AddTaskActivity
 import com.upfinder.voicetodo.task.ReminderActivity
 import com.upfinder.voicetodo.utils.intformat2
 import com.upfinder.voicetodo.utils.logE
-import com.upfinder.voicetodo.view.EventsDialog
 import java.util.*
 
 
@@ -69,7 +68,7 @@ class NotificationWorker : Worker() {
         setNotification(index, task)
 
         if (task.notifiType == AddTaskActivity.NOTIFITYPE_BELL) {
-//            setTTS(index, task)
+            setTTS(index, task)
         }
         //
         if(task.events.length>0){

@@ -13,10 +13,11 @@ import com.upfinder.voicetodo.data.AppDatabase
 import com.upfinder.voicetodo.data.entitys.Task
 import com.upfinder.voicetodo.receiver.MyAlarmBroadcastReceiver
 import com.upfinder.voicetodo.task.AddTaskActivity
+import com.upfinder.voicetodo.task.EventsDialogActivity
+import com.upfinder.voicetodo.task.ReminderActivity
 import com.upfinder.voicetodo.util.CalendarUtils
 import com.upfinder.voicetodo.utils.logE
 import com.upfinder.voicetodo.utils.toast
-import com.upfinder.voicetodo.view.EventsDialog
 import java.util.*
 
 class MyApplication : Application() {
@@ -26,16 +27,17 @@ class MyApplication : Application() {
         private lateinit var localDataSource: TasksLocalDataSource
         private lateinit var mApplication: MyApplication
         private const val DAY_MILLIS = 24 * 60 * 60 * 1000L
-        private lateinit var mEventsDialog : EventsDialog
         fun getInstance(): Application {
             return mApplication
         }
 
         //显示事件包弹窗
         fun showEventsDialog(task:Task){
-            mEventsDialog =EventsDialog(MyApplication.getInstance().baseContext,R.layout.events_dialog,true,true);
-            mEventsDialog.setEvents(task.events)
-            mEventsDialog.show();
+            val intent = Intent(mApplication.baseContext, EventsDialogActivity::class.java)
+            intent.putExtra("events", task.events)
+            intent.putExtra("taskId", task.id)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            mApplication.startActivity(intent)
         }
 
         /*获取数据库实例*/

@@ -62,6 +62,9 @@
         </activity>
         <activity android:name=".task.HistoryActivity"/>
         <activity android:name=".activity.MianzeActivity"/>
+        <activity android:name=".task.EventsDialogActivity"
+            android:theme="@style/dialogstyle"
+            />
 
         <service
                 android:name=".service.PlayerMusicService"

@@ -1,6 +1,7 @@
-package com.upfinder.voicetodo.view;
+package com.upfinder.voicetodo.task;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,22 +14,14 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.upfinder.voicetodo.R;
-import com.upfinder.voicetodo.task.AddTaskActivity;
-import com.upfinder.voicetodo.utils.UtilsKt;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-public class EventsDialog extends Dialog {
-
-    private boolean iscancelable;//控制点击dialog外部是否dismiss
-    private boolean isBackCancelable;//控制返回键是否dismiss
-    private View view;
-    private Context context;
+public class EventsDialogActivity extends Activity {
 
     private TextView mEventTitle;
     private Button mPreBtn;
@@ -41,31 +34,21 @@ public class EventsDialog extends Dialog {
     private JSONObject mCurrentEvent;
     private int mIndex = 0;
     private boolean isFinish = false;
-
-    public EventsDialog(Context context, int layoutid, boolean isCancelable, boolean isBackCancelable) {
-        super(context, R.style.MyDialog);
-        Looper.getMainLooper();
-        this.context = context;
-        this.view = LayoutInflater.from(context).inflate(layoutid, null);
-        this.iscancelable = isCancelable;
-        this.isBackCancelable = isBackCancelable;
-        initView();
-    }
-
+    private View mViewOutSide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(view);//这行一定要写在前面
-        setCancelable(iscancelable);//点击外部不可dismiss
-        setCanceledOnTouchOutside(isBackCancelable);
-
+        mViewOutSide = LayoutInflater.from(this).inflate(R.layout.events_dialog,null);
+        setContentView(mViewOutSide);
+        String events = getIntent().getStringExtra("events");
+        String taskid = getIntent().getStringExtra("taskId");
+        setEvents(events);
+        initView();
 
     }
 
     public void setEvents(String events){
         try {
-
             mEventsArrary = new JSONArray(events);
             mIndex = 0;
             refreshUI();
@@ -142,20 +125,19 @@ public class EventsDialog extends Dialog {
 
     //保存事件
     public void saveEvent(){
-
+        finish();
     };
 
     //清除事件
     public void clearEvent(){
-
+        finish();
     }
 
     public static final int HANDLER_MSG_REFRESHUI = 1;
 
-    private Handler mHandler = new Handler(getContext().getMainLooper()){
+    public Handler mHandler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch (msg.what){
                 case  HANDLER_MSG_REFRESHUI:
                     try {
@@ -205,6 +187,7 @@ public class EventsDialog extends Dialog {
                     }
                     break;
             }
+            return false;
         }
-    };
+    });
 }
