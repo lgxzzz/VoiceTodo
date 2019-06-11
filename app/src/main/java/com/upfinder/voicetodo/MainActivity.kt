@@ -229,7 +229,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         AddTaskActivity.ALARM_REPEAT -> repeatTasks.add(task)
                         AddTaskActivity.ALARM_EVENTS -> {
                             eventTasks.add(task)
-                            MyApplication.showEventsDialog(task)
+//                            MyApplication.showEventsDialog(task)
                         }
                     }
                 }

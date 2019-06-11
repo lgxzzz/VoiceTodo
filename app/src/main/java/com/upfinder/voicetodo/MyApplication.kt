@@ -18,6 +18,7 @@ import com.upfinder.voicetodo.task.ReminderActivity
 import com.upfinder.voicetodo.util.CalendarUtils
 import com.upfinder.voicetodo.utils.logE
 import com.upfinder.voicetodo.utils.toast
+import com.upfinder.voicetodo.worker.BaiduTTsApi
 import java.util.*
 
 class MyApplication : Application() {
@@ -26,6 +27,7 @@ class MyApplication : Application() {
           lateinit var  notification:Notification
         private lateinit var localDataSource: TasksLocalDataSource
         private lateinit var mApplication: MyApplication
+        private lateinit var mTTsApi: BaiduTTsApi
         private const val DAY_MILLIS = 24 * 60 * 60 * 1000L
         fun getInstance(): Application {
             return mApplication
@@ -45,6 +47,9 @@ class MyApplication : Application() {
             return localDataSource
         }
 
+        fun getTTs() : BaiduTTsApi{
+            return mTTsApi
+        }
         /**
          * 创建task任务
          */
@@ -116,9 +121,12 @@ class MyApplication : Application() {
         super.onCreate()
         mApplication = this
         localDataSource = TasksLocalDataSource.getInstance(AppExecutors(), AppDatabase.getInstance(this).tasksDao())
+        mTTsApi = BaiduTTsApi();
+        mTTsApi.initTTS(this)
         setForeverNotification()
 
     }
+
 
     private fun setForeverNotification() {
         logE("setForeverNotification:"+Thread.currentThread().id)

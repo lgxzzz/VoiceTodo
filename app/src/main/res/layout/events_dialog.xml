@@ -3,28 +3,38 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:orientation="vertical"
         tools:context=".MainActivity"
         android:background="@android:color/white"
     >
-
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/delete"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/eventCancel"
+        />
         <TextView
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="事件信息"
             android:id="@+id/eventTitle"
             android:textSize="25dp"
             android:textColor="@android:color/black"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_weight="1"
             />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
             >
                 <RadioGroup
                     android:id="@+id/rgEventState"
@@ -45,17 +55,19 @@
                         <RadioButton
                             android:id="@+id/rbFail"
                             android:layout_width="0dp" android:textColor="#333"
-                            android:layout_marginLeft="16dp" android:textSize="16sp"
+                            android:layout_marginLeft="6dp" android:textSize="16sp"
                             android:layout_height="wrap_content"
+                            android:checked="false"
                             android:text="未完成"
                             android:layout_weight="1"
                             />
                         <RadioButton
                             android:id="@+id/rbIgnore"
                             android:layout_width="0dp" android:textColor="#333"
-                            android:layout_marginLeft="16dp" android:textSize="16sp"
+                            android:layout_marginLeft="6dp" android:textSize="16sp"
                             android:layout_height="wrap_content"
                             android:text="跳过此项"
+                            android:checked="false"
                             android:layout_weight="1"
                             />
                 </RadioGroup>
@@ -64,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
+            android:layout_margin="15dp"
             >
                 <Button
                     android:layout_width="0dp"
@@ -72,6 +84,7 @@
                     android:layout_weight="1"
                     android:text="上一项"
                     android:id="@+id/btPreEvent"
+                    android:layout_margin="5dp"
                     />
                 <Button
                     android:layout_width="0dp"
@@ -79,6 +92,7 @@
                     android:layout_weight="1"
                     android:text="下一项"
                     android:id="@+id/btNextEvent"
+                    android:layout_margin="5dp"
                     />
         </LinearLayout>
 
