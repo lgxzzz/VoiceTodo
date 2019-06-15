@@ -23,7 +23,7 @@
                     android:layout_height="60dp"
             >
                 <TextView
-                        android:text="事件包" android:gravity="center"
+                        android:text="程序事件" android:gravity="center"
                         android:paddingRight="20dp"
                         android:textColor="#333"
                         android:textSize="24sp"

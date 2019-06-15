@@ -33,7 +33,7 @@ class MyApplication : Application() {
             return mApplication
         }
 
-        //显示事件包弹窗
+        //显示程序事件弹窗
         fun showEventsDialog(task:Task){
             val intent = Intent(mApplication.baseContext, EventsDialogActivity::class.java)
             intent.putExtra("events", task.events)

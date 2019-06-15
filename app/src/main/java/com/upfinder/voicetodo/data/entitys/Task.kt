@@ -19,7 +19,7 @@ data class Task constructor(
     var calendar: Calendar,//时间
     var color: Int,//颜色
     var notifiType: Int= AddTaskActivity.NOTIFITYPE_BELL,//通知类型
-    var events : String,//事件包
+    var events : String,//事件条目
     @PrimaryKey @ColumnInfo(name = "id") val id: String = (System.currentTimeMillis()/1000).toInt().toString()
 //    @PrimaryKey @ColumnInfo(name = "id") val id: String = UUID.randomUUID().toString()
 ) : Serializable {

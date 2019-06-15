@@ -22,16 +22,21 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource
 import com.upfinder.voicetodo.activity.MianzeActivity
 import com.upfinder.voicetodo.data.entitys.Task
+import com.upfinder.voicetodo.data.entitys.TaskEvent
 import com.upfinder.voicetodo.service.PlayerMusicService
 import com.upfinder.voicetodo.task.AddTaskActivity
 import com.upfinder.voicetodo.task.HistoryActivity
 import com.upfinder.voicetodo.task.TaskAdapter
+import com.upfinder.voicetodo.task.TaskEventAdapter
 import com.upfinder.voicetodo.utils.logE
 import com.upfinder.voicetodo.worker.LiveJobService
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val PERMISSION_REQUESTCODE = 123
     private lateinit var singleAdapter: TaskAdapter
     private lateinit var repeatAdapter: TaskAdapter
-    private lateinit var eventsAdapter: TaskAdapter
+    private lateinit var eventsAdapter: TaskEventAdapter
     private lateinit var screenOnReceiver:MyBroadcastReceiver
     private val handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -124,18 +129,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
         })
-        eventsAdapter = TaskAdapter(this, arrayListOf())
+        eventsAdapter = TaskEventAdapter(this, arrayListOf())
         eventsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
-        eventsAdapter.setOnManagerListener(object : TaskAdapter.OnTaskManageListener {
+        eventsAdapter.setOnManagerListener(object : TaskEventAdapter.OnTaskManageListener {
             override fun onDel(task: Task) {
                 AlertDialog.Builder(this@MainActivity)
-                        .setTitle("确定删除这条记录吗？")
-                        .setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
-                        .setPositiveButton("确定") { dialog, _ ->
-                            dialog.dismiss()
-                            MyApplication.getTasksLocalDataSourceInstance().deleteTask(task.id)
-                            refreshTasks()
-                        }.create().show()
+                    .setTitle("确定删除这条记录吗？")
+                    .setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
+                    .setPositiveButton("确定") { dialog, _ ->
+                        dialog.dismiss()
+                        MyApplication.getTasksLocalDataSourceInstance().deleteTask(task.id)
+                        refreshTasks()
+                    }.create().show()
 
             }
 
@@ -174,7 +179,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         rvTaskRepeat.adapter = eventsAdapter
         rvTaskSingle.layoutManager = LinearLayoutManager(this)
         rvTaskSingle.adapter = singleAdapter
-
 
     }
 
@@ -218,7 +222,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onTasksLoaded(tasks: List<Task>) {
                 val repeatTasks: ArrayList<Task> = arrayListOf()
                 val singleTasks: ArrayList<Task> = arrayListOf()
-                val eventTasks: ArrayList<Task> = arrayListOf()
+                val eventTasks: ArrayList<TaskEvent> = arrayListOf()
                 tasks.forEach { task ->
                     when (task.alarmType) {
                         AddTaskActivity.ALARM_SINGLE -> {
@@ -228,8 +232,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         }
                         AddTaskActivity.ALARM_REPEAT -> repeatTasks.add(task)
                         AddTaskActivity.ALARM_EVENTS -> {
-                            eventTasks.add(task)
-//                            MyApplication.showEventsDialog(task)
+                            try {
+                                var events : String = task.events
+                                var jsonArrary : JSONArray = JSONArray(events)
+                                for (i in 0..jsonArrary.length()-1){
+                                    var obj: JSONObject = jsonArrary.get(i) as JSONObject
+                                    var event : String = obj.get("event") as String
+                                    var state : Int = obj.get("state") as Int
+                                    var taskEvent : TaskEvent = TaskEvent(task,i,event,state)
+                                    eventTasks.add(taskEvent)
+                                }
+                            }catch (e:Exception){
+                                e.printStackTrace()
+                            }
                         }
                     }
                 }
@@ -244,14 +259,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             override fun onDataNotAvailable() {
-                val repeatTasks: ArrayList<Task> = arrayListOf()
-                addEmptyView(repeatTasks)
-                eventsAdapter.setNewData(repeatTasks)
-                repeatAdapter.setNewData(repeatTasks)
+//                val repeatTasks: ArrayList<Task> = arrayListOf()
+//                addEmptyView(repeatTasks)
+                val eventTasks : ArrayList<TaskEvent> = arrayListOf()
+                addEventEmptyView(eventTasks)
+
+                eventsAdapter.setNewData(eventTasks)
+//                repeatAdapter.setNewData(repeatTasks)
                 singleAdapter.setNewData(arrayListOf())
             }
 
         })
+    }
+
+    private fun addEventEmptyView(eventTasks: ArrayList<TaskEvent>) {
+        var task:Task = Task(
+            title = "示例",
+            description = "",
+            alarmType = AddTaskActivity.ALARM_EVENTS,
+            repeatPeriod = 1,
+            calendar = Calendar.getInstance(),
+            color = resources.getColor(R.color.task_default),
+            notifiType = AddTaskActivity.NOTIFITYPE_BELL,
+            events = "",
+            id = (-10000).toString()
+        )
+        var index:Int = -1
+
+        eventTasks.add(
+            TaskEvent(task,index,"",-1)
+        )
     }
 
     private fun addEmptyView(repeatTasks: ArrayList<Task>) {
@@ -264,8 +301,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 calendar = Calendar.getInstance(),
                 color = resources.getColor(R.color.task_default),
                 notifiType = AddTaskActivity.NOTIFITYPE_BELL,
-                    events = "",
-                  id = (-10000).toString()
+                events = "",
+                id = (-10000).toString()
             )
         )
     }

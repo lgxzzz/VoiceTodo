@@ -46,7 +46,7 @@ class BaiduTTsApi constructor(){
                     when (task.alarmType) {
                         AddTaskActivity.ALARM_REPEAT -> speakContent += "固定事件"
                         AddTaskActivity.ALARM_SINGLE -> speakContent += "临时事件"
-                        AddTaskActivity.ALARM_EVENTS -> speakContent += "事件包"
+                        AddTaskActivity.ALARM_EVENTS -> speakContent += "程序事件"
                     }
                     speakContent += "提醒您，距离您" + task.getFormatTitle() + "还有30分钟"
                 }
