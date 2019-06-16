@@ -24,12 +24,13 @@ class EventsDialogActivity : Activity(){
     private var mCurrentEvent: JSONObject? = null
     private var mIndex = 0
     private var isFinish = false
+    private var mTaskId : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.events_dialog)
         val events = intent.getStringExtra("events")
-        val taskid = intent.getStringExtra("taskId")
+        mTaskId = intent.getStringExtra("taskId")
         setEvents(events)
         initView()
     }
@@ -96,6 +97,7 @@ class EventsDialogActivity : Activity(){
 
     //清除事件
     fun clearEvent() {
+        MyApplication.getTasksLocalDataSourceInstance().deleteTask(mTaskId)
         finish()
     }
 

@@ -6,6 +6,8 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -207,6 +209,10 @@ class AddTaskActivity : AppCompatActivity() {
             }
         }
 
+        chooseRingtone.setOnClickListener {
+            toChooseRingtoneUri()
+        }
+
         changeAlarmTypeLayout(mAlarmType)
         //临时事件隐藏周期选择
 //        when (mAlarmType) {
@@ -251,6 +257,20 @@ class AddTaskActivity : AppCompatActivity() {
 
     }
 
+    fun toChooseRingtoneUri(){
+        var intent :Intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "设置通知铃声");
+        startActivityForResult(intent, 2);
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        var uri : Uri ?= data?.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+        if (uri !=null){
+            MyApplication.saveChooseRingtoneUri(uri);
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_task, menu)

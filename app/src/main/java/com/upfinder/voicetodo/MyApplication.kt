@@ -3,6 +3,8 @@ package com.upfinder.voicetodo
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.support.v7.app.AppCompatActivity
@@ -20,6 +22,13 @@ import com.upfinder.voicetodo.utils.logE
 import com.upfinder.voicetodo.utils.toast
 import com.upfinder.voicetodo.worker.BaiduTTsApi
 import java.util.*
+import android.content.SharedPreferences
+import android.database.Cursor
+import android.provider.MediaStore
+import android.util.Log
+import com.upfinder.voicetodo.util.SharedPreferencesUtils
+import java.io.File
+
 
 class MyApplication : Application() {
 
@@ -29,8 +38,15 @@ class MyApplication : Application() {
         private lateinit var mApplication: MyApplication
         private lateinit var mTTsApi: BaiduTTsApi
         private const val DAY_MILLIS = 24 * 60 * 60 * 1000L
+        public lateinit var mChooseRingtoneUri : Uri
+        private lateinit var mPreferences : SharedPreferencesUtils
         fun getInstance(): Application {
             return mApplication
+        }
+
+        fun saveChooseRingtoneUri(uri:Uri){
+            mChooseRingtoneUri = uri;
+            mPreferences.ringtone = uri.toString()
         }
 
         //显示程序事件弹窗
@@ -123,6 +139,15 @@ class MyApplication : Application() {
         localDataSource = TasksLocalDataSource.getInstance(AppExecutors(), AppDatabase.getInstance(this).tasksDao())
         mTTsApi = BaiduTTsApi();
         mTTsApi.initTTS(this)
+        mPreferences = SharedPreferencesUtils(this)
+        if(mPreferences.ringtone.equals("default")){
+            mChooseRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+        }else{
+            mChooseRingtoneUri = Uri.fromFile(File(mPreferences.ringtone))
+            if (mChooseRingtoneUri==null){
+                mChooseRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+            }
+        }
         setForeverNotification()
 
     }

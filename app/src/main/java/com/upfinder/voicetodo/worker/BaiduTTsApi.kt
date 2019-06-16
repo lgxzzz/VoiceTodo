@@ -13,6 +13,7 @@ import com.upfinder.voicetodo.data.entitys.Task
 import com.upfinder.voicetodo.listener.MessageListener
 import com.upfinder.voicetodo.task.AddTaskActivity
 import com.upfinder.voicetodo.utils.logE
+import org.json.JSONArray
 
 class BaiduTTsApi constructor(){
 
@@ -57,9 +58,20 @@ class BaiduTTsApi constructor(){
                     speakContent += "您" + task.getFormatTitle() + "的时间到了"
                 }
             }
-            try {
 
-                val notificationUrl = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+            try {
+                var notificationUrl = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                when (task.alarmType){
+                    AddTaskActivity.ALARM_REPEAT -> notificationUrl = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                    AddTaskActivity.ALARM_EVENTS -> {
+                        notificationUrl = MyApplication.mChooseRingtoneUri
+                    }
+                    AddTaskActivity.ALARM_SINGLE -> {
+                        notificationUrl = MyApplication.mChooseRingtoneUri
+                    }
+                }
+
+
                 val ringtone = RingtoneManager.getRingtone(mContext, notificationUrl)
                 ringtone.play()
                 val vibrator = MyApplication.getInstance().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -69,8 +81,9 @@ class BaiduTTsApi constructor(){
                     ringtone.stop()
                 }
                 playTTS(speakContent)
-                //
-                if(task.events.length>0){
+
+                var eventsjsonArray : JSONArray = JSONArray(task.events)
+                if (eventsjsonArray.length()>0){
                     MyApplication.showEventsDialog(task)
                 }
             } catch (e: Exception) {
