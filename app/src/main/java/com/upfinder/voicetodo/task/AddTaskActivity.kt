@@ -339,7 +339,7 @@ class AddTaskActivity : AppCompatActivity() {
             }
             AddTaskActivity.ALARM_REPEAT -> {
                 //固定重复事件使用日历任务
-                MyApplication.notifiCalendarTask(mLocalTask, currentTask)
+                MyApplication.notifiTask(mLocalTask, currentTask)
             }
             AddTaskActivity.ALARM_EVENTS -> {
                 //固定重复事件使用日历任务
