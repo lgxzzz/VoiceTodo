@@ -14,10 +14,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.text.InputType
 import android.text.TextUtils
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.util.DisplayMetrics
+import android.view.*
 import android.widget.EditText
 import android.widget.RadioButton
 import cn.qqtheme.framework.picker.ColorPicker
@@ -223,8 +221,12 @@ class AddTaskActivity : AppCompatActivity() {
 //        }
 
         changeNotifiTypeLayout(mNotifiType)
+        var spanCount : Int = 2;
+        if(isPad()){
+            spanCount = 1;
+        }
 
-        rvColors.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
+        rvColors.layoutManager = GridLayoutManager(this, spanCount, GridLayoutManager.HORIZONTAL, false)
         val adapter = TaskColorAdapter(this)
         adapter.setOnChoiceListener(object : TaskColorAdapter.OnChoiceListener {
             @SuppressLint("ResourceType")
@@ -456,5 +458,33 @@ class AddTaskActivity : AppCompatActivity() {
 
         timePickerDialog.show()
     }
+
+    /**
+ * 判断是否为平板
+ *
+ * @return
+ */
+ fun  isPad() : Boolean{
+	var wm : WindowManager = this@AddTaskActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager;
+	var  display :Display = wm.getDefaultDisplay();
+	// 屏幕宽度
+	var screenWidth : Int = display.getWidth()
+        ;
+	// 屏幕高度
+	var  screenHeight : Int = display.getHeight()
+	var  dm : DisplayMetrics = DisplayMetrics();
+	display.getMetrics(dm);
+	var x : Double = Math.pow((dm.widthPixels / dm.xdpi).toDouble(), 2.0);
+	var y : Double = Math.pow((dm.heightPixels / dm.ydpi).toDouble(), 2.0);
+	// 屏幕尺寸
+	var screenInches : Double = Math.sqrt(x + y);
+	// 大于6尺寸则为Pad
+	if (screenInches >= 6.0) {
+
+		return true;
+	}
+	return false;
+}
+
 
 }

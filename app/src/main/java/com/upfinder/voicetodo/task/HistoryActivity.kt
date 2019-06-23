@@ -78,6 +78,11 @@ class HistoryActivity : AppCompatActivity() {
                                 singleTasks.add(task)
                             }
                         }
+                        AddTaskActivity.ALARM_EVENTS-> {
+                            if (task.calendar.timeInMillis < Calendar.getInstance().timeInMillis) {
+                                singleTasks.add(task)
+                            }
+                        }
                     }
                 }
 

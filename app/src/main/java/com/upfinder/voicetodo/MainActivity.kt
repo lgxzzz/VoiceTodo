@@ -233,14 +233,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         AddTaskActivity.ALARM_REPEAT -> repeatTasks.add(task)
                         AddTaskActivity.ALARM_EVENTS -> {
                             try {
-                                var events : String = task.events
-                                var jsonArrary : JSONArray = JSONArray(events)
-                                for (i in 0..jsonArrary.length()-1){
-                                    var obj: JSONObject = jsonArrary.get(i) as JSONObject
-                                    var event : String = obj.get("event") as String
-                                    var state : Int = obj.get("state") as Int
-                                    var taskEvent : TaskEvent = TaskEvent(task,i,event,state)
-                                    eventTasks.add(taskEvent)
+                                if (task.calendar.timeInMillis >= Calendar.getInstance().timeInMillis) {
+                                    var events : String = task.events
+                                    var jsonArrary : JSONArray = JSONArray(events)
+                                    for (i in 0..jsonArrary.length()-1){
+                                        var obj: JSONObject = jsonArrary.get(i) as JSONObject
+                                        var event : String = obj.get("event") as String
+                                        var state : Int = obj.get("state") as Int
+                                        var taskEvent : TaskEvent = TaskEvent(task,i,event,state)
+                                        eventTasks.add(taskEvent)
+                                    }
                                 }
                             }catch (e:Exception){
                                 e.printStackTrace()
@@ -345,6 +347,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_user -> {
             }
             R.id.nav_about -> {
+                startActivity(Intent(this@MainActivity,AboutActivity::class.java))
             }
             R.id.nav_mianze -> startActivity(Intent(this@MainActivity, MianzeActivity::class.java))
         }

@@ -63,6 +63,7 @@
         <activity android:name=".task.ReminderActivity">
         </activity>
         <activity android:name=".task.HistoryActivity"/>
+        <activity android:name=".AboutActivity"/>
         <activity android:name=".activity.MianzeActivity"/>
         <activity android:name=".task.EventsDialogActivity" android:theme="@style/dialogstyle"></activity>
         <service
