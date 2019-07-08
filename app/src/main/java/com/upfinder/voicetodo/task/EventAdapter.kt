@@ -5,11 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.TextView
 import com.upfinder.voicetodo.R
+import com.upfinder.voicetodo.data.entitys.Task
 import java.util.ArrayList
 
 class EventAdapter(var context:Context,var events: ArrayList<String>) :BaseAdapter() {
+
+    private lateinit var onEventManageListener: EventAdapter.OnEventManageListener
+    private  var onEdit :Boolean = true ;
+
+    fun setOnManagerListener(onEventManageListener: EventAdapter.OnEventManageListener) {
+        this.onEventManageListener = onEventManageListener
+    }
+
+    fun setEdit(onEdit : Boolean){
+        this.onEdit = onEdit;
+    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view :View?
@@ -25,6 +38,12 @@ class EventAdapter(var context:Context,var events: ArrayList<String>) :BaseAdapt
             view = convertView
             viewHolder = view.tag as ViewHolder
         }
+        viewHolder.delete?.setOnClickListener{
+            onEventManageListener.onDel(events.get(position),position);
+        }
+
+        viewHolder.delete?.visibility = if(onEdit) View.VISIBLE else View.GONE;
+
         viewHolder.name?.text = events.get(position)
         return  view as View;
 
@@ -45,9 +64,15 @@ class EventAdapter(var context:Context,var events: ArrayList<String>) :BaseAdapt
     private class ViewHolder(view: View?) {
         var name: TextView? = null
         var status : TextView?= null
+        var delete : Button? =null
         init {
             this.name = view?.findViewById(R.id.event_name)
             this.status = view?.findViewById(R.id.event_status)
+            this.delete = view?.findViewById(R.id.event_delete)
         }
+    }
+
+    interface OnEventManageListener {
+        fun onDel(event: String,index : Int)
     }
 }

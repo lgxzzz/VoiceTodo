@@ -23,6 +23,7 @@ import cn.qqtheme.framework.util.ConvertUtils
 import com.upfinder.voicetodo.MyApplication
 import com.upfinder.voicetodo.R
 import com.upfinder.voicetodo.data.entitys.Task
+import com.upfinder.voicetodo.data.entitys.TaskEvent
 import com.upfinder.voicetodo.utils.KeyboardUtils
 import com.upfinder.voicetodo.utils.intformat2
 import com.upfinder.voicetodo.utils.logE
@@ -111,6 +112,28 @@ class AddTaskActivity : AppCompatActivity() {
 
             (rgRepeatPeriod.getChildAt(AddTaskActivity.NOTIFI_REPEAT_PERIOD.indexOf(it.repeatPeriod)) as RadioButton).isChecked = true
             tvRepeatPeriod.text = it.repeatPeriod.toString()
+
+            if(it?.events!=null){
+                mEventChain.clear();
+                var events : String = it.events
+                var jsonArrary : JSONArray = JSONArray(events)
+                for (i in 0..jsonArrary.length()-1){
+                    var obj: JSONObject = jsonArrary.get(i) as JSONObject
+                    var event : String = obj.get("event") as String
+                    var state : Int = obj.get("state") as Int
+                    mEventChain.add(event);
+                }
+                mEvenAapter = EventAdapter(this@AddTaskActivity,mEventChain)
+                mEvenAapter.setOnManagerListener(object : EventAdapter.OnEventManageListener{
+                    override fun onDel(event: String, index: Int) {
+                        mEventChain.removeAt(index);
+                        mEvenAapter.notifyDataSetChanged()
+                    }
+                })
+                lineEventsListview.visibility = View.VISIBLE;
+                lineEventsListview.adapter = mEvenAapter;
+                mEvenAapter.notifyDataSetChanged()
+            }
         }
 
         ivChoiceColor.setColor(mSelectedColor)
@@ -201,6 +224,12 @@ class AddTaskActivity : AppCompatActivity() {
                 mEventChain.add(event);
 
                 mEvenAapter = EventAdapter(this@AddTaskActivity,mEventChain)
+                mEvenAapter.setOnManagerListener(object : EventAdapter.OnEventManageListener{
+                    override fun onDel(event: String, index: Int) {
+                        mEventChain.removeAt(index);
+                        mEvenAapter.notifyDataSetChanged()
+                    }
+                })
                 lineEventsListview.visibility = View.VISIBLE;
                 lineEventsListview.adapter = mEvenAapter;
                 mEvenAapter.notifyDataSetChanged()

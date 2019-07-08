@@ -12,9 +12,12 @@ import android.widget.RadioButton
 import com.upfinder.voicetodo.MyApplication
 import com.upfinder.voicetodo.R
 import com.upfinder.voicetodo.data.entitys.Task
+import com.upfinder.voicetodo.data.entitys.TaskEvent
 import com.upfinder.voicetodo.utils.intformat2
 import kotlinx.android.synthetic.main.activity_add_task.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.*
 
 class ReminderActivity : AppCompatActivity() {
@@ -23,7 +26,8 @@ class ReminderActivity : AppCompatActivity() {
     private var task: Task? = null
     private var index: Int = 0
     private var canEdit: Boolean = false
-
+    var mEventChain: ArrayList<String> = arrayListOf()
+    lateinit var mEvenAapter: EventAdapter
 
     companion object {
         fun launch(context: Context, taskId: String, index: Int, canEdit: Boolean) {
@@ -115,11 +119,20 @@ class ReminderActivity : AppCompatActivity() {
 //                        tvChoiceDate.visibility = View.VISIBLE
                         viewTimeChooseDivider.visibility = View.VISIBLE
                     }
+                    AddTaskActivity.ALARM_REPEAT -> {
+                        rbRepeat.isChecked = true
+//                        tvChoiceDate.visibility = View.GONE
+                        viewTimeChooseDivider.visibility = View.GONE
+
+                    }
                 }
                 when (it.notifiType) {
                     AddTaskActivity.NOTIFITYPE_BELL -> rbBell.isChecked = true
                     AddTaskActivity.NOTIFITYPE_VIBRATE -> rbVibrate.isChecked = true
                 }
+
+                changeAlarmTypeLayout(it.alarmType)
+
                 tvChoiceDate.text = intformat2(it.calendar.get(Calendar.YEAR)) + "/" +
                         intformat2(it.calendar.get(Calendar.MONTH) + 1) + "/" +
                         intformat2(it.calendar.get(Calendar.DATE))
@@ -135,6 +148,22 @@ class ReminderActivity : AppCompatActivity() {
                         lineRepeationPeriod.visibility = View.GONE
                     }
                 }
+                chooseRingtone.visibility = View.GONE
+                if(task?.events!=null){
+                    var events : String = task.events
+                    var jsonArrary : JSONArray = JSONArray(events)
+                    for (i in 0..jsonArrary.length()-1){
+                        var obj: JSONObject = jsonArrary.get(i) as JSONObject
+                        var event : String = obj.get("event") as String
+                        var state : Int = obj.get("state") as Int
+                        mEventChain.add(event)
+                    }
+                    mEvenAapter = EventAdapter(this@ReminderActivity,mEventChain)
+                    mEvenAapter.setEdit(false)
+                    lineEventsListview.visibility = View.VISIBLE;
+                    lineEventsListview.adapter = mEvenAapter;
+                    mEvenAapter.notifyDataSetChanged()
+                }
 
                 AddTaskActivity.NOTIFI_REPEAT_PERIOD[7] = 0
                 if (it.repeatPeriod !in AddTaskActivity.NOTIFI_REPEAT_PERIOD) {
@@ -145,6 +174,47 @@ class ReminderActivity : AppCompatActivity() {
                         true
                 tvRepeatPeriod.text = it.repeatPeriod.toString()
             }
+        }
+
+    }
+
+    private fun changeAlarmTypeLayout(alarmType: Int) {
+        when (alarmType) {
+            AddTaskActivity.ALARM_REPEAT -> {
+//                tvChoiceDate.visibility = View.GONE
+                llRepeationPeriod.visibility = View.VISIBLE
+                lineRepeationPeriod.visibility = View.VISIBLE
+//                viewTimeChooseDivider.visibility = View.GONE
+                if (rgAlarmType.checkedRadioButtonId != rbRepeat.id) {
+                    rgAlarmType.check(rbRepeat.id)
+                }
+
+            }
+
+            AddTaskActivity.ALARM_SINGLE -> {
+//                tvChoiceDate.visibility = View.VISIBLE
+                llRepeationPeriod.visibility = View.GONE
+                lineRepeationPeriod.visibility = View.GONE
+//                viewTimeChooseDivider.visibility = View.VISIBLE
+                if (rgAlarmType.checkedRadioButtonId != rbSingle.id) {
+                    rgAlarmType.check(rbSingle.id)
+                }
+
+            }
+
+            AddTaskActivity.ALARM_EVENTS -> {
+//                tvChoiceDate.visibility = View.VISIBLE
+                llRepeationPeriod.visibility = View.GONE
+                lineRepeationPeriod.visibility = View.GONE
+                lineAddEvent.visibility = View.GONE
+                lineEvents.visibility = View.VISIBLE
+//                viewTimeChooseDivider.visibility = View.VISIBLE
+                if (rgAlarmType.checkedRadioButtonId != rbSingle.id) {
+                    rgAlarmType.check(rbSingle.id)
+                }
+
+            }
+
         }
 
     }
