@@ -23,6 +23,7 @@ import com.example.android.architecture.blueprints.todoapp.data.source.TasksData
 import com.upfinder.voicetodo.activity.MianzeActivity
 import com.upfinder.voicetodo.data.entitys.Task
 import com.upfinder.voicetodo.data.entitys.TaskEvent
+import com.upfinder.voicetodo.keeplive.LiveService
 import com.upfinder.voicetodo.service.PlayerMusicService
 import com.upfinder.voicetodo.task.AddTaskActivity
 import com.upfinder.voicetodo.task.HistoryActivity
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         filter.addAction(Intent.ACTION_SCREEN_ON)
         registerReceiver(screenOnReceiver, filter)
 
+        LiveService.toLiveService(this) ;
     }
 
     private fun initView() {

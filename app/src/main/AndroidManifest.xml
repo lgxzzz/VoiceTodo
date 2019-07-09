@@ -67,6 +67,14 @@
         <activity android:name=".task.HistoryActivity"/>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".activity.MianzeActivity"/>
+        <activity android:name=".keeplive.SinglePixelActivity"
+            android:excludeFromRecents="true"
+
+            android:finishOnTaskLaunch="false"
+
+            android:launchMode="singleInstance"
+            ></activity>
+        <service android:name=".keeplive.LiveService"></service>
         <activity android:name=".task.EventsDialogActivity" android:theme="@style/dialogstyle"></activity>
         <service
                 android:name=".service.PlayerMusicService"
