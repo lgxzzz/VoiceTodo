@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         filter.addAction(Intent.ACTION_SCREEN_ON)
         registerReceiver(screenOnReceiver, filter)
 
-        LiveService.toLiveService(this) ;
+//        LiveService.toLiveService(this) ;
     }
 
     private fun initView() {

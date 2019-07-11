@@ -304,6 +304,7 @@
                     android:layout_marginRight="4dp"
                     android:background="@drawable/shape_repeat_period_bg"
                     android:textColor="#fff"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"/>
 
                 <RadioButton
@@ -320,6 +321,7 @@
                     android:layout_marginRight="4dp"
                     android:background="@drawable/shape_repeat_period_bg"
                     android:textColor="#fff"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"/>
 
                 <RadioButton
@@ -336,6 +338,7 @@
                     android:layout_marginRight="4dp"
                     android:background="@drawable/shape_repeat_period_bg"
                     android:textColor="#fff"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"/>
 
                 <RadioButton
@@ -352,6 +355,7 @@
                     android:layout_marginRight="4dp"
                     android:background="@drawable/shape_repeat_period_bg"
                     android:textColor="#fff"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"/>
                 <RadioButton
                     android:button="@null"
@@ -367,6 +371,7 @@
                     android:layout_marginRight="4dp"
                     android:background="@drawable/shape_repeat_period_bg"
                     android:textColor="#fff"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"/>
 
             </RadioGroup>
